@@ -2,100 +2,906 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>HomePilot AI</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
+
 <body>
 
-  <header>
-    <h1>HomePilot AI</h1>
-    <p>Your AI-powered real estate assistant</p>
-  </header>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <nav class="navbar">
+
+    <div class="nav-container">
+
+      <a
+        href="#"
+        class="brand"
+      >
+        <div class="brand-icon">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M5.5 10.5V20h13v-9.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M9.5 20v-6h5v6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <div>
+          <span class="brand-name">HomePilot</span>
+          <span class="brand-badge">AI</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#analyze">Analyze</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+      </div>
+
+      <a
+        href="#analyze"
+        class="nav-button"
+      >
+        Try the Assistant
+      </a>
+
+    </div>
+
+  </nav>
 
   <main>
-    <section class="card">
-      <h2>Analyze a Property</h2>
 
-      <form id="propertyForm">
+    <section class="hero">
 
-        <label for="mode">I am a:</label>
-        <select id="mode">
-          <option value="buyer">Buyer</option>
-          <option value="seller">Seller</option>
-        </select>
+      <div class="hero-content">
 
-        <label for="budget">Budget or target price:</label>
-        <input
-          type="number"
-          id="budget"
-          placeholder="700000"
-        >
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          AI-powered property intelligence
+        </div>
 
-        <label for="price">Property price:</label>
-        <input
-          type="number"
-          id="price"
-          placeholder="675000"
-          required
-        >
+        <h1>
+          Make smarter real estate decisions
+          <span>with confidence.</span>
+        </h1>
 
-        <label for="taxes">Annual property taxes:</label>
-        <input
-          type="number"
-          id="taxes"
-          placeholder="13000"
-        >
+        <p class="hero-description">
+          Analyze properties, uncover possible concerns, and get clear next
+          steps based on your goals.
+        </p>
 
-        <label for="bedrooms">Bedrooms:</label>
-        <input
-          type="number"
-          id="bedrooms"
-          placeholder="4"
-        >
+        <div class="hero-actions">
 
-        <label for="bathrooms">Bathrooms:</label>
-        <input
-          type="number"
-          id="bathrooms"
-          step="0.5"
-          placeholder="2.5"
-        >
+          <a
+            href="#analyze"
+            class="primary-button"
+          >
+            Analyze a Property
 
-        <label for="goals">Your goals:</label>
-        <textarea
-          id="goals"
-          placeholder="I need four bedrooms, a reasonable commute, and I can handle cosmetic updates."
-        ></textarea>
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
 
-        <label for="description">Property description:</label>
-        <textarea
-          id="description"
-          placeholder="Paste the listing description and any known property details."
-          required
-        ></textarea>
+          <div class="trust-note">
+            <div class="trust-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 3 5 6v5c0 4.6 2.9 8.5 7 10 4.1-1.5 7-5.4 7-10V6l-7-3Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
 
-        <button type="submit">Analyze Property</button>
+                <path
+                  d="m9 12 2 2 4-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
 
-      </form>
-    </section>
+            <span>Your API key stays private</span>
+          </div>
 
-    <section class="card">
-      <h2>AI Report</h2>
-      <div id="result">
-        Your report will appear here.
+        </div>
+
       </div>
+
+      <div class="hero-visual">
+
+        <div class="visual-card main-property-card">
+
+          <div class="visual-card-header">
+
+            <div>
+              <p class="small-label">PROPERTY INSIGHT</p>
+              <h3>Buyer Match Report</h3>
+            </div>
+
+            <div class="match-score">
+              <span>92</span>
+              <small>/100</small>
+            </div>
+
+          </div>
+
+          <div class="property-preview">
+
+            <div class="property-image-placeholder">
+
+              <svg
+                viewBox="0 0 120 80"
+                aria-hidden="true"
+              >
+                <path
+                  d="M15 38 60 8l45 30v34H15Z"
+                  fill="currentColor"
+                  opacity=".18"
+                />
+
+                <path
+                  d="M15 38 60 8l45 30"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M26 35v37h68V35"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="5"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M48 72V49h24v23"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="5"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+            </div>
+
+            <div class="property-info">
+              <h4>Strong Property Fit</h4>
+              <p>Within budget and meets your major needs.</p>
+            </div>
+
+          </div>
+
+          <div class="insight-list">
+
+            <div class="insight-row success">
+              <span class="insight-icon">✓</span>
+
+              <div>
+                <strong>Price fits your budget</strong>
+                <small>Estimated room remaining: $25,000</small>
+              </div>
+            </div>
+
+            <div class="insight-row warning">
+              <span class="insight-icon">!</span>
+
+              <div>
+                <strong>Roof age needs verification</strong>
+                <small>Ask for permits and replacement history</small>
+              </div>
+            </div>
+
+            <div class="insight-row neutral">
+              <span class="insight-icon">i</span>
+
+              <div>
+                <strong>Next recommended step</strong>
+                <small>Schedule a licensed inspection</small>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="floating-card floating-card-one">
+          <span class="floating-icon">🏠</span>
+
+          <div>
+            <strong>Property Analysis</strong>
+            <small>Clear strengths and concerns</small>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-two">
+          <span class="floating-icon">✨</span>
+
+          <div>
+            <strong>AI Guidance</strong>
+            <small>Personalized to your goals</small>
+          </div>
+        </div>
+
+      </div>
+
     </section>
+
+    <section
+      class="analysis-section"
+      id="analyze"
+    >
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-label">PROPERTY ANALYZER</span>
+
+          <h2>
+            Tell us about the property
+          </h2>
+
+          <p>
+            Enter the details you know. HomePilot AI will organize them into
+            a clear property report.
+          </p>
+        </div>
+
+        <div class="step-indicator">
+          <span class="active"></span>
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+
+      <div class="workspace">
+
+        <section class="form-panel">
+
+          <div class="panel-header">
+
+            <div class="panel-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 20V10l8-6 8 6v10"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M9 20v-6h6v6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div>
+              <h3>Property details</h3>
+              <p>Complete as much as you can.</p>
+            </div>
+
+          </div>
+
+          <form id="propertyForm">
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+                <span>1</span>
+
+                <div>
+                  <h4>Your role</h4>
+                  <p>Choose how you are viewing this property.</p>
+                </div>
+              </div>
+
+              <div class="role-selector">
+
+                <label class="role-option">
+
+                  <input
+                    type="radio"
+                    name="roleChoice"
+                    value="buyer"
+                    checked
+                  >
+
+                  <span class="role-card">
+                    <span class="role-emoji">🔑</span>
+
+                    <span>
+                      <strong>Buyer</strong>
+                      <small>I am evaluating a home to purchase.</small>
+                    </span>
+                  </span>
+
+                </label>
+
+                <label class="role-option">
+
+                  <input
+                    type="radio"
+                    name="roleChoice"
+                    value="seller"
+                  >
+
+                  <span class="role-card">
+                    <span class="role-emoji">🏷️</span>
+
+                    <span>
+                      <strong>Seller</strong>
+                      <small>I am preparing or pricing a home.</small>
+                    </span>
+                  </span>
+
+                </label>
+
+              </div>
+
+              <select
+                id="mode"
+                class="hidden-select"
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+              </select>
+
+            </div>
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+                <span>2</span>
+
+                <div>
+                  <h4>Numbers</h4>
+                  <p>Add the basic financial and property details.</p>
+                </div>
+              </div>
+
+              <div class="input-grid">
+
+                <div class="input-group">
+                  <label for="budget">
+                    Budget or target price
+                  </label>
+
+                  <div class="input-shell">
+                    <span class="input-prefix">$</span>
+
+                    <input
+                      type="number"
+                      id="budget"
+                      placeholder="700,000"
+                    >
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="price">
+                    Property price
+                  </label>
+
+                  <div class="input-shell">
+                    <span class="input-prefix">$</span>
+
+                    <input
+                      type="number"
+                      id="price"
+                      placeholder="675,000"
+                      required
+                    >
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="taxes">
+                    Annual taxes
+                  </label>
+
+                  <div class="input-shell">
+                    <span class="input-prefix">$</span>
+
+                    <input
+                      type="number"
+                      id="taxes"
+                      placeholder="13,000"
+                    >
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="bedrooms">
+                    Bedrooms
+                  </label>
+
+                  <div class="input-shell">
+                    <span class="input-prefix">🛏</span>
+
+                    <input
+                      type="number"
+                      id="bedrooms"
+                      placeholder="4"
+                    >
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="bathrooms">
+                    Bathrooms
+                  </label>
+
+                  <div class="input-shell">
+                    <span class="input-prefix">🛁</span>
+
+                    <input
+                      type="number"
+                      id="bathrooms"
+                      step="0.5"
+                      placeholder="2.5"
+                    >
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+                <span>3</span>
+
+                <div>
+                  <h4>Goals and property information</h4>
+                  <p>Give the AI enough context to make the report useful.</p>
+                </div>
+              </div>
+
+              <div class="input-group full-width">
+
+                <label for="goals">
+                  Your goals
+                </label>
+
+                <textarea
+                  id="goals"
+                  placeholder="Example: I need four bedrooms, a reasonable commute, and I can handle cosmetic updates."
+                ></textarea>
+
+                <span class="field-hint">
+                  Include must-haves, deal breakers, and renovation tolerance.
+                </span>
+
+              </div>
+
+              <div class="input-group full-width">
+
+                <label for="description">
+                  Property description
+                </label>
+
+                <textarea
+                  id="description"
+                  class="large-textarea"
+                  placeholder="Paste the listing description and add anything you know about the roof, HVAC, flooding, permits, renovations, HOA, or condition."
+                  required
+                ></textarea>
+
+                <span class="field-hint">
+                  HomePilot only analyzes the information you provide.
+                </span>
+
+              </div>
+
+            </div>
+
+            <button
+              type="submit"
+              class="analyze-button"
+            >
+
+              <span>Analyze Property</span>
+
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+
+            </button>
+
+          </form>
+
+        </section>
+
+        <section class="result-panel">
+
+          <div class="panel-header">
+
+            <div class="panel-icon result-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 3h8l4 4v14H4V3h4Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M14 3v5h5M8 13h8M8 17h6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+
+            <div>
+              <h3>AI property report</h3>
+              <p>Your analysis will appear here.</p>
+            </div>
+
+          </div>
+
+          <div
+            id="result"
+            class="result-box"
+          >
+
+            <div class="empty-state">
+
+              <div class="empty-state-graphic">
+
+                <div class="document-shape">
+
+                  <span></span>
+                  <span></span>
+                  <span></span>
+
+                </div>
+
+                <div class="sparkle sparkle-one">✦</div>
+                <div class="sparkle sparkle-two">✦</div>
+
+              </div>
+
+              <h4>Ready when you are</h4>
+
+              <p>
+                Complete the property form and HomePilot AI will create a
+                structured report with strengths, concerns, missing
+                information, and next steps.
+              </p>
+
+              <div class="report-preview-list">
+
+                <div>
+                  <span>✓</span>
+                  Overall assessment
+                </div>
+
+                <div>
+                  <span>✓</span>
+                  Possible concerns
+                </div>
+
+                <div>
+                  <span>✓</span>
+                  Questions to ask
+                </div>
+
+                <div>
+                  <span>✓</span>
+                  Recommended next steps
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+    <section
+      class="features-section"
+      id="features"
+    >
+
+      <div class="features-heading">
+
+        <span class="section-label">BUILT FOR CLARITY</span>
+
+        <h2>
+          Useful guidance without the confusing language
+        </h2>
+
+      </div>
+
+      <div class="feature-grid">
+
+        <article class="feature-card">
+
+          <div class="feature-icon blue">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 18V8M10 18V4M16 18v-7M22 18H2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+
+          <h3>Property analysis</h3>
+
+          <p>
+            Turn scattered property details into an organized report.
+          </p>
+
+        </article>
+
+        <article class="feature-card">
+
+          <div class="feature-icon purple">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <circle
+                cx="11"
+                cy="11"
+                r="7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+
+              <path
+                d="m20 20-4-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+
+          <h3>Concern detection</h3>
+
+          <p>
+            Identify missing information and possible issues to investigate.
+          </p>
+
+        </article>
+
+        <article class="feature-card">
+
+          <div class="feature-icon green">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 4h14v16H5Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="m8 9 1.5 1.5L12 8M8 15l1.5 1.5L12 14M14 10h2M14 16h2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <h3>Next-step checklist</h3>
+
+          <p>
+            Get practical questions and actions for the next stage.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
   </main>
 
-  <footer>
-    <p>
-      HomePilot AI provides educational information only and does not replace
-      a licensed real estate agent, attorney, inspector, appraiser, or lender.
-    </p>
+  <footer
+    class="footer"
+    id="about"
+  >
+
+    <div class="footer-container">
+
+      <div class="footer-brand">
+
+        <div class="brand-icon">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M5.5 10.5V20h13v-9.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M9.5 20v-6h5v6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <span>HomePilot AI</span>
+
+      </div>
+
+      <p>
+        Educational guidance only. HomePilot AI does not replace a licensed
+        real estate agent, attorney, inspector, appraiser, lender, or tax
+        professional.
+      </p>
+
+    </div>
+
   </footer>
 
   <script src="config.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    const roleInputs = document.querySelectorAll(
+      'input[name="roleChoice"]'
+    );
+
+    const modeSelect = document.getElementById("mode");
+
+    roleInputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        modeSelect.value = input.value;
+      });
+    });
+  </script>
+
 </body>
 </html>
