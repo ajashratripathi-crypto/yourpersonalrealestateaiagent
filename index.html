@@ -848,7 +848,189 @@
   </div>
 
   <script>
-    /* Global Application State */
+    const appState = {
+      currentView: 'home',
+      currentDashTab: 'summary',
+      mode: 'buyer',
+      uploadedFiles: [],
+      workerUrl: localStorage.getItem('homepilot_worker_url') || '',
+      geminiApiKey: localStorage.getItem('homepilot_gemini_key') || '',
+      financialChartInstance: null
+    };
+
+    function switchView(viewId) {
+      appState.currentView = viewId;
+      const views = document.querySelectorAll('.page-view');
+      views.forEach(v => v.classList.add('hidden'));
+
+      const targetView = document.getElementById(`view-${viewId}`);
+      if (targetView) {
+        targetView.classList.remove('hidden');
+      }
+
+      const navHome = document.getElementById('nav-home');
+      const navDash = document.getElementById('nav-dashboard');
+      
+      if (navHome) navHome.className = `nav-btn px-4 py-1.5 text-xs font-semibold rounded-lg transition ${viewId === 'home' ? 'bg-slate-800 text-white font-bold' : 'text-slate-300 hover:text-white hover:bg-slate-800/60'}`;
+      if (navDash) navDash.className = `nav-btn px-4 py-1.5 text-xs font-semibold rounded-lg transition flex items-center space-x-1.5 ${viewId === 'dashboard' ? 'bg-slate-800 text-white font-bold' : 'text-slate-300 hover:text-white hover:bg-slate-800/60'}`;
+
+      if (viewId === 'dashboard' && !appState.financialChartInstance) {
+        setTimeout(() => {
+          initFinancialChart();
+        }, 100);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchDashTab(tabId) {
+      appState.currentDashTab = tabId;
+      const tabs = document.querySelectorAll('.dash-content-tab');
+      tabs.forEach(t => t.classList.add('hidden'));
+
+      const targetTab = document.getElementById(`tab-${tabId}`);
+      if (targetTab) {
+        targetTab.classList.remove('hidden');
+      }
+
+      const btns = document.querySelectorAll('.dash-tab-btn');
+      btns.forEach(btn => {
+        btn.classList.remove('active', 'text-brand-400', 'border-b-2', 'border-brand-500', 'bg-slate-900/80');
+        btn.classList.add('text-slate-400');
+      });
+
+      const activeBtn = document.getElementById(`dashtab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'text-brand-400', 'border-b-2', 'border-brand-500', 'bg-slate-900/80');
+        activeBtn.classList.remove('text-slate-400');
+      }
+    }
+
+    function setMode(mode) {
+      appState.mode = mode;
+      const modeInput = document.getElementById('input-mode');
+      if (modeInput) modeInput.value = mode;
+
+      ['buyer', 'seller', 'investor'].forEach(m => {
+        const btn = document.getElementById(`mode-${m}`);
+        if (btn) {
+          if (m === mode) {
+            btn.className = 'mode-btn py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white border border-brand-500 shadow-md';
+          } else {
+            btn.className = 'mode-btn py-2 text-xs font-semibold rounded-xl bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800';
+          }
+        }
+      });
+    }
+
+    function loadScenario(presetKey) {
+      const badge = document.getElementById('active-scenario-badge');
+      
+      if (presetKey === 'fixer') {
+        document.getElementById('input-address').value = '442 Highland Ave, Montclair, NJ 07042';
+        document.getElementById('input-price').value = 580000;
+        document.getElementById('input-budget').value = 620000;
+        document.getElementById('input-taxes').value = 11200;
+        document.getElementById('input-beds').value = 3;
+        document.getElementById('input-baths').value = 2;
+        document.getElementById('input-description').value = 'Victorian colonial fixer-upper. Roof flashing degraded with active attic moisture. 100-Amp main panel with double-tapped breakers. 18-yr old HVAC condenser. Rear addition encroaching 6.2ft on 10ft side setback.';
+        
+        appState.uploadedFiles = [
+          { name: 'Montclair_Inspection_Report_442Highland.pdf', size: '3.4 MB' }
+        ];
+        if (badge) badge.textContent = 'Fixer Preset Loaded';
+      } else if (presetKey === 'multifamily') {
+        document.getElementById('input-address').value = '88 Grove St, Paterson, NJ 07501';
+        document.getElementById('input-price').value = 850000;
+        document.getElementById('input-budget').value = 900000;
+        document.getElementById('input-taxes').value = 16800;
+        document.getElementById('input-beds').value = 6;
+        document.getElementById('input-baths').value = 4;
+        document.getElementById('input-description').value = '2-Family multi-family property generating $6,200/mo gross rental income. Separate water meters. Needs minor electrical servicing and HVAC coil maintenance.';
+        
+        appState.uploadedFiles = [
+          { name: '88Grove_Property_Survey_and_Title.pdf', size: '1.8 MB' }
+        ];
+        if (badge) badge.textContent = 'Multi-Family Preset Loaded';
+      }
+
+      renderFileList();
+      showToast(`Loaded ${presetKey.toUpperCase()} deal preset parameters`, 'success');
+    }
+
+    function resetWorkspace() {
+      const form = document.getElementById('property-form');
+      if (form) form.reset();
+      appState.uploadedFiles = [];
+      renderFileList();
+      
+      const emptyState = document.getElementById('report-empty-state');
+      if (emptyState) emptyState.classList.remove('hidden');
+
+      const tabs = document.querySelectorAll('.dash-content-tab');
+      tabs.forEach(t => t.classList.add('hidden'));
+
+      const badge = document.getElementById('active-scenario-badge');
+      if (badge) badge.textContent = 'New Workspace';
+
+      showToast('Workspace reset', 'info');
+    }
+
+    function triggerNativeFilePicker() {
+      const input = document.getElementById('native-file-input');
+      if (input) input.click();
+    }
+
+    function handleFileSelect(event) {
+      if (!event.target.files) return;
+      const files = Array.from(event.target.files);
+      files.forEach(f => {
+        const sizeMb = (f.size / (1024 * 1024)).toFixed(1);
+        appState.uploadedFiles.push({
+          name: f.name,
+          size: `${sizeMb} MB`
+        });
+      });
+      renderFileList();
+      showToast(`Attached ${files.length} document(s)`, 'success');
+    }
+
+    function handleLogin(e) {
+      if (e) e.preventDefault();
+      const emailEl = document.getElementById('login-email');
+      const email = emailEl ? emailEl.value : 'investor@homepilot.ai';
+      showToast(`Welcome back, ${email}`, 'success');
+      
+      const userStatus = document.getElementById('user-status-area');
+      if (userStatus) {
+        userStatus.innerHTML = `
+          <div class="flex items-center space-x-2 text-xs text-slate-300 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
+            <i data-lucide="user-check" class="h-3.5 w-3.5 text-emerald-400"></i>
+            <span class="font-bold">${email.split('@')[0]}</span>
+          </div>
+          <button onclick="switchView('dashboard')" class="px-4 py-2 text-xs font-bold rounded-xl bg-brand-600 hover:bg-brand-500 text-white transition shadow-lg shadow-brand-600/30 flex items-center space-x-1.5">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+            <span class="hidden sm:inline">Launch Studio</span>
+          </button>
+        `;
+        lucide.createIcons();
+      }
+
+      switchView('dashboard');
+    }
+
+    function quickAuth(persona) {
+      showToast(`Signed in as ${persona}`, 'success');
+      switchView('dashboard');
+    }
+
+    async function loadSampleScenarioAndRun() {
+      switchView('dashboard');
+      loadScenario('fixer');
+      await new Promise(r => setTimeout(r, 300));
+      runAgentAnalysis();
+    }
+
     /* Zillow & MLS Address Scraper Tool */
     async function fetchZillowData() {
       const addressInput = document.getElementById('input-address');
@@ -1348,6 +1530,45 @@ We recommend demanding an immediate **$18,500 seller credit at closing** to offs
       const result = await res.json();
       return result.report;
     }
+
+    window.onload = function() {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+      
+      if (appState.workerUrl) {
+        const wInput = document.getElementById('config-worker-url');
+        if (wInput) wInput.value = appState.workerUrl;
+      }
+      if (appState.geminiApiKey) {
+        const gInput = document.getElementById('config-gemini-key');
+        if (gInput) gInput.value = appState.geminiApiKey;
+      }
+
+      renderFileList();
+      logConsole('SYSTEM', 'HomePilot AI Studio engine initialized. Ready for deal underwriting.');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropZone = document.getElementById('drop-zone');
+      if (dropZone) {
+        dropZone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          dropZone.classList.add('border-brand-500', 'bg-brand-500/10');
+        });
+        dropZone.addEventListener('dragleave', (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('border-brand-500', 'bg-brand-500/10');
+        });
+        dropZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('border-brand-500', 'bg-brand-500/10');
+          if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelect({ target: { files: e.dataTransfer.files } });
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
