@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomePilot AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>HomePilot AI</h1>
+    <p>Your AI-powered real estate assistant</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Analyze a Property</h2>
+
+      <form id="propertyForm">
+
+        <label for="mode">I am a:</label>
+        <select id="mode">
+          <option value="buyer">Buyer</option>
+          <option value="seller">Seller</option>
+        </select>
+
+        <label for="budget">Budget or target price:</label>
+        <input
+          type="number"
+          id="budget"
+          placeholder="700000"
+        >
+
+        <label for="price">Property price:</label>
+        <input
+          type="number"
+          id="price"
+          placeholder="675000"
+          required
+        >
+
+        <label for="taxes">Annual property taxes:</label>
+        <input
+          type="number"
+          id="taxes"
+          placeholder="13000"
+        >
+
+        <label for="bedrooms">Bedrooms:</label>
+        <input
+          type="number"
+          id="bedrooms"
+          placeholder="4"
+        >
+
+        <label for="bathrooms">Bathrooms:</label>
+        <input
+          type="number"
+          id="bathrooms"
+          step="0.5"
+          placeholder="2.5"
+        >
+
+        <label for="goals">Your goals:</label>
+        <textarea
+          id="goals"
+          placeholder="I need four bedrooms, a reasonable commute, and I can handle cosmetic updates."
+        ></textarea>
+
+        <label for="description">Property description:</label>
+        <textarea
+          id="description"
+          placeholder="Paste the listing description and any known property details."
+          required
+        ></textarea>
+
+        <button type="submit">Analyze Property</button>
+
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>AI Report</h2>
+      <div id="result">
+        Your report will appear here.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      HomePilot AI provides educational information only and does not replace
+      a licensed real estate agent, attorney, inspector, appraiser, or lender.
+    </p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
