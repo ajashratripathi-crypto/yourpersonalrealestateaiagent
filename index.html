@@ -220,7 +220,7 @@
           );
         }
 
-        resultBox.textContent = data.report;
+        resultBox.textContent = marked.parse(data.report);
       } catch (error) {
         resultBox.textContent =
           "Something went wrong:\n\n" + error.message;
